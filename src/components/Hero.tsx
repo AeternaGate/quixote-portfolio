@@ -15,9 +15,19 @@ export default function Hero() {
     const el = ref.current;
     if (!el || reduced) return;
 
+    // enter from right on load
+    gsap.set(el, { opacity: 0, x: 80 });
+    gsap.to(el, {
+      opacity: 1,
+      x: 0,
+      duration: 1,
+      ease: 'power3.out',
+    });
+
+    // exit to left on scroll
     const anim = gsap.to(el, {
       opacity: 0,
-      y: -30,
+      x: -80,
       ease: 'none',
       scrollTrigger: {
         trigger: el,

@@ -20,6 +20,7 @@ export default function ScrollBlock({ children, direction, isLast = false }: Pro
     if (!el || reduced) return;
 
     const xFrom = direction === 'left' ? -80 : 80;
+    const xTo = direction === 'left' ? 80 : -80;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -47,13 +48,12 @@ export default function ScrollBlock({ children, direction, isLast = false }: Pro
     });
 
     if (!isLast) {
-      // hold (implicit gap)
-      // exit
+      // exit to opposite side
       tl.to(el, {
         opacity: 0,
         scale: 0.92,
         y: -60,
-        x: 0,
+        x: xTo,
         duration: 0.4,
         ease: 'power2.in',
       });
