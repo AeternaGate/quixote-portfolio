@@ -4,33 +4,16 @@ export interface Dict {
   navWork: string;
   navAbout: string;
   navContact: string;
-  heroEyebrow: string;
   heroH1a: string;
   heroH1b: string;
   heroH1c: string;
   heroLede: string;
   heroCta1: string;
   heroCta2: string;
-  scroll: string;
   workLabel: string;
   workH2a: string;
   workH2b: string;
-  p1Title: string;
-  p1Body: string;
-  p1t1: string;
-  p1t2: string;
-  p1t3: string;
-  p2Title: string;
-  p2Body: string;
-  p2t1: string;
-  p2t2: string;
-  p2t3: string;
-  p3Title: string;
-  p3Body: string;
-  p3t1: string;
-  p3t2: string;
-  p3Link: string;
-  pLink: string;
+  workBody: string;
   aboutLabel: string;
   aboutH2a: string;
   aboutH2b: string;
@@ -53,7 +36,6 @@ export const I18N: Record<Lang, Dict> = {
     navWork: 'Work',
     navAbout: 'About',
     navContact: 'Contact',
-    heroEyebrow: 'Freelance · AI & Full-stack Development',
     heroH1a: 'Ideas, ',
     heroH1b: 'engineered',
     heroH1c: ' into shipped software.',
@@ -61,29 +43,11 @@ export const I18N: Record<Lang, Dict> = {
       "I'm Quixote, a developer who turns vague ideas and hard problems into real, working products. From AI-powered automation to useful tools, I build the thing you can actually use.",
     heroCta1: 'See my work',
     heroCta2: "Let's talk",
-    scroll: 'Scroll',
     workLabel: 'Selected Work',
     workH2a: "Projects I've ",
     workH2b: 'built & shipped',
-    p1Title: 'AutoPilot Bot',
-    p1Body:
-      'Telegram bot with an integrated AI assistant that schedules and auto-posts content to channels, keeping your audience fed while you sleep.',
-    p1t1: 'Telegram',
-    p1t2: 'AI',
-    p1t3: 'Automation',
-    p2Title: 'AI Toolbox',
-    p2Body:
-      'A curated website of genuinely useful AI tools, gathered in one place so you can find the right instrument for the job, fast.',
-    p2t1: 'Web',
-    p2t2: 'AI',
-    p2t3: 'Tools',
-    p3Title: 'Open Source',
-    p3Body:
-      'Public code and experiments on GitHub, a living record of how I work, what I build, and the craft behind it.',
-    p3t1: 'GitHub',
-    p3t2: 'Code',
-    p3Link: 'View GitHub',
-    pLink: 'View project',
+    workBody:
+      'AutoPilot Bot — Telegram bot with AI assistant for auto-posting content. AI Toolbox — a curated site of useful AI tools. Open Source — public experiments and code on GitHub.',
     aboutLabel: 'About',
     aboutH2a: 'A partner, ',
     aboutH2b: 'not just a developer',
@@ -106,7 +70,6 @@ export const I18N: Record<Lang, Dict> = {
     navWork: 'Работы',
     navAbout: 'Обо мне',
     navContact: 'Контакты',
-    heroEyebrow: 'Фриланс · AI и Full-stack разработка',
     heroH1a: 'Идеи — в ',
     heroH1b: 'работающий',
     heroH1c: ' продукт.',
@@ -114,29 +77,11 @@ export const I18N: Record<Lang, Dict> = {
       'Я Quixote, разработчик, который превращает расплывчатые идеи и сложные задачи в настоящие, работающие продукты. От AI-автоматизации до полезных инструментов, я создаю то, чем реально можно пользоваться.',
     heroCta1: 'Мои работы',
     heroCta2: 'Обсудить проект',
-    scroll: 'Листайте',
     workLabel: 'Избранные работы',
     workH2a: 'Проекты, которые я ',
     workH2b: 'создал и запустил',
-    p1Title: 'AutoPilot Bot',
-    p1Body:
-      'Telegram-бот с интегрированным AI-ассистентом, который планирует и автоматически публикует контент в каналах, поддерживая вашу аудиторию, пока вы спите.',
-    p1t1: 'Telegram',
-    p1t2: 'AI',
-    p1t3: 'Автоматизация',
-    p2Title: 'AI Toolbox',
-    p2Body:
-      'Подборка действительно полезных AI-инструментов, собранных в одном месте, чтобы вы быстро нашли нужный, без лишнего поиска.',
-    p2t1: 'Web',
-    p2t2: 'AI',
-    p2t3: 'Инструменты',
-    p3Title: 'Open Source',
-    p3Body:
-      'Публичный код и эксперименты на GitHub, живая история того, как я работаю, что создаю и как выглядит моя работа.',
-    p3t1: 'GitHub',
-    p3t2: 'Код',
-    p3Link: 'Открыть GitHub',
-    pLink: 'Смотреть проект',
+    workBody:
+      'AutoPilot Bot — Telegram-бот с AI-ассистентом для автопубликации контента. AI Toolbox — подборка полезных AI-инструментов в одном месте. Open Source — публичный код и эксперименты на GitHub.',
     aboutLabel: 'Обо мне',
     aboutH2a: 'Партнёр, ',
     aboutH2b: 'а не просто разработчик',

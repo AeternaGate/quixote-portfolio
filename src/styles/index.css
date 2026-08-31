@@ -249,6 +249,10 @@ a {
 
 /* ---- sections ---- */
 .section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 8rem 5vw;
 }
 .sec-label {
@@ -274,79 +278,11 @@ h2 em {
   font-size: 1.2rem;
 }
 
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.6rem;
-  margin-top: 3rem;
+.scrollblock {
+  will-change: opacity, transform;
 }
-.card {
-  position: relative;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  overflow: hidden;
-  background: linear-gradient(170deg, rgba(60, 16, 18, 0.4), rgba(14, 4, 4, 0.7));
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-  backdrop-filter: blur(4px);
-}
-.card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(224, 33, 58, 0.5);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-}
-.card svg.icon {
-  width: 44px;
-  height: 44px;
-  stroke: var(--petal);
-  fill: none;
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.card h3 {
-  font-size: 1.65rem;
-  font-weight: 600;
-}
-.card p {
-  color: var(--muted);
-  font-size: 1.08rem;
-}
-.tags {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: auto;
-}
-.tag {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.26rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  color: var(--cream);
-  background: rgba(154, 27, 27, 0.16);
-}
-.card .link {
-  color: var(--petal);
-  text-decoration: none;
-  font-size: 1.05rem;
-  letter-spacing: 0.04em;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.card .link::after {
-  content: "→";
-  transition: transform 0.25s;
-}
-.card .link:hover::after {
-  transform: translateX(4px);
-}
+
+/* ---- contact chips ---- */
 
 .contact {
   text-align: center;

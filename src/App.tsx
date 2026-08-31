@@ -7,6 +7,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SmoothCursor from './components/SmoothCursor';
+import ScrollBlock from './components/ScrollBlock';
 
 export default function App() {
   return (
@@ -20,9 +21,15 @@ export default function App() {
       <div className="shell">
         <Nav />
         <Hero />
-        <Work />
-        <About />
-        <Contact />
+        <ScrollBlock direction="left">
+          <Work />
+        </ScrollBlock>
+        <ScrollBlock direction="right">
+          <About />
+        </ScrollBlock>
+        <ScrollBlock direction="left" isLast>
+          <Contact />
+        </ScrollBlock>
         <Footer />
       </div>
     </>
