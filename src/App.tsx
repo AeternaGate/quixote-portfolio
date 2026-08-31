@@ -6,10 +6,12 @@ import Work from './components/Work';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import SmoothCursor from './components/SmoothCursor';
 
 export default function App() {
   return (
     <>
+      <SmoothCursor />
       <SilkBackground />
       <ScrollRose />
       <div className="veil" />
