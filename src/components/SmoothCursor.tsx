@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react';
 
 const CRIMSON = '#dc143c';
-const POINTS = 40;
-const LINE_WIDTH = 0.12;
-const SPRING = 0.4;
-const DAMPING = 0.5;
-const BLUR = 6;
+const POINTS = 50;
+const LINE_WIDTH = 3;
+const SPRING = 0.18;
+const DAMPING = 0.6;
+const TRAIL_BLUR = 12;
+const DOT_RADIUS = 6;
+const DOT_SMOOTH = 0.25;
 
 export default function SmoothCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,14 +24,22 @@ export default function SmoothCursor() {
 
     let w = window.innerWidth;
     let h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
 
     const onResize = () => {
       w = window.innerWidth;
       h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
     };
     window.addEventListener('resize', onResize);
 
@@ -40,6 +50,9 @@ export default function SmoothCursor() {
 
     let mouseX = w / 2;
     let mouseY = h / 2;
+    let dotX = w / 2;
+    let dotY = h / 2;
+
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -57,12 +70,17 @@ export default function SmoothCursor() {
         const dx = prev.x - curr.x;
         const dy = prev.y - curr.y;
         const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        const targetDist = 4;
+        const targetDist = 5;
         curr.x += (dx / dist) * (dist - targetDist) * DAMPING;
         curr.y += (dy / dist) * (dist - targetDist) * DAMPING;
       }
 
+      dotX += (mouseX - dotX) * DOT_SMOOTH;
+      dotY += (mouseY - dotY) * DOT_SMOOTH;
+
       ctx.clearRect(0, 0, w, h);
+
+      // trail
       ctx.beginPath();
       ctx.moveTo(points[0].x, points[0].y);
       for (let i = 1; i < POINTS; i++) {
@@ -77,9 +95,20 @@ export default function SmoothCursor() {
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
       ctx.shadowColor = CRIMSON;
-      ctx.shadowBlur = BLUR;
-      ctx.globalAlpha = 0.7;
+      ctx.shadowBlur = TRAIL_BLUR;
+      ctx.globalAlpha = 0.55;
       ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+
+      // cursor dot
+      ctx.beginPath();
+      ctx.arc(dotX, dotY, DOT_RADIUS, 0, Math.PI * 2);
+      ctx.fillStyle = CRIMSON;
+      ctx.shadowColor = CRIMSON;
+      ctx.shadowBlur = 10;
+      ctx.globalAlpha = 0.9;
+      ctx.fill();
       ctx.globalAlpha = 1;
       ctx.shadowBlur = 0;
 
@@ -100,8 +129,6 @@ export default function SmoothCursor() {
       style={{
         position: 'fixed',
         inset: 0,
-        width: '100vw',
-        height: '100vh',
         pointerEvents: 'none',
         zIndex: 50,
       }}

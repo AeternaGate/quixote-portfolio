@@ -33,18 +33,20 @@ body {
   line-height: 1.58;
   font-size: 1.08rem;
   -webkit-font-smoothing: antialiased;
+  cursor: none;
 }
 
 button {
   background: none;
   border: none;
   color: inherit;
-  cursor: pointer;
+  cursor: none;
   font-family: inherit;
 }
 
 a {
   color: inherit;
+  cursor: none;
 }
 
 /* selection / caret / scrollbar */
