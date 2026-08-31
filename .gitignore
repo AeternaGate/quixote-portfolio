@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+.playwright-mcp/
+.opencode/skills/impeccable/reference/
+.opencode/skills/impeccable/scripts/
+.opencode/skills/morph-ppt/
+.vite/
