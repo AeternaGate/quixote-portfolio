@@ -128,7 +128,6 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 22px 5vw;
-  backdrop-filter: blur(6px);
   background: linear-gradient(180deg, rgba(12, 3, 3, 0.5), transparent);
 }
 .brand {
