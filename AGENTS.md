@@ -2,6 +2,10 @@
 
 Quixote.Dev portfolio. Vite + React 18 + TypeScript + Tailwind CSS + GSAP/ScrollTrigger + reactbits WebGL background. Preview with `npm run dev` (http://localhost:5177). Build with `npm run build` → `dist/`.
 
+## Git workflow (mandatory)
+
+After every meaningful change: `git add -A && git commit -m "description" && git push`. Each logical unit of work gets its own commit. Never batch unrelated changes into one commit.
+
 ## Product truth (read before editing UI)
 
 - `PRODUCT.md` is the source of truth. All project/contact content is **placeholder**; never fabricate real testimonials, metrics, emails, or links.
