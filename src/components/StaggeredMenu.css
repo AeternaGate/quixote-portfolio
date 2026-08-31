@@ -38,7 +38,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.3rem;
   color: var(--ivory);
-  cursor: pointer;
+  cursor: none;
   letter-spacing: 0.04em;
 }
 
@@ -53,7 +53,7 @@
   gap: 0.4rem;
   background: transparent;
   border: none;
-  cursor: pointer;
+  cursor: none;
   color: var(--ivory);
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
@@ -191,7 +191,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   font-size: 3rem;
-  cursor: pointer;
+  cursor: none;
   line-height: 1;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -219,7 +219,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.95rem;
   padding: 0.4em 1.2em;
-  cursor: pointer;
+  cursor: none;
   transition: border-color 0.3s, color 0.3s;
 }
 
