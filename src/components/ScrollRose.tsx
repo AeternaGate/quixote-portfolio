@@ -6,12 +6,6 @@ import rosePoster from '../../assets/rose-wilting-poster-hq.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Fixed rose backdrop whose playback is scrubbed by page scroll:
- * scrolling the whole page from top to bottom plays the wilting video
- * frame by frame. Requires an all-intra (every-frame-keyframe) source so
- * currentTime seeking is smooth — see assets/rose-scroll.mp4.
- */
 export default function ScrollRose() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -19,7 +13,6 @@ export default function ScrollRose() {
     const video = videoRef.current;
     if (!video) return;
 
-    const state = { t: 0 };
     let trigger: ScrollTrigger | null = null;
 
     const setup = () => {
@@ -30,18 +23,11 @@ export default function ScrollRose() {
         trigger: document.documentElement,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: 0.3,
         onUpdate: (self) => {
-          gsap.to(state, {
-            t: self.progress * duration,
-            duration: 0.2,
-            overwrite: true,
-            onUpdate: () => {
-              if (video.readyState >= 2) {
-                video.currentTime = Math.min(state.t, duration - 0.001);
-              }
-            },
-          });
+          if (video.readyState >= 2) {
+            video.currentTime = Math.min(self.progress * duration, duration - 0.001);
+          }
         },
       });
     };
