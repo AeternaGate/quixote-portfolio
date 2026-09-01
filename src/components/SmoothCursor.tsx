@@ -12,8 +12,10 @@ export default function SmoothCursor() {
   const target = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const forceAnimations = params.get('force-animations') === 'true';
     const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mql.matches) return;
+    if (!forceAnimations && mql.matches) return;
     if ('ontouchstart' in window) return;
 
     document.documentElement.classList.add('custom-cursor');

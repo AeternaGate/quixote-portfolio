@@ -327,13 +327,6 @@ h2 em {
   max-width: 820px;
   margin: 0 auto;
   background: radial-gradient(120% 120% at 50% 0%, rgba(90, 20, 22, 0.35), rgba(12, 3, 3, 0.6));
-  opacity: 0;
-  transform: translateY(60px) translateX(80px) scale(0.92);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-.contact--visible {
-  opacity: 1;
-  transform: translateY(0) translateX(0) scale(1);
 }
 .contact h2 {
   font-size: clamp(2rem, 5vw, 3.6rem);

@@ -49,7 +49,7 @@ export default function Contact() {
   }, [reduced]);
 
   return (
-    <section ref={ref} id="contact" className="section section--right">
+    <section ref={ref} id="contact"   className="section section--right scrollblock">
       <div className="eyebrow" style={{ marginBottom: 0 }}>
         {t.contactEyebrow}
       </div>
