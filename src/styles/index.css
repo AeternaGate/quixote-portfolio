@@ -184,10 +184,6 @@ a {
   opacity: 1;
   transform: translateY(0);
 }
-.hero--hidden {
-  opacity: 0;
-  transform: translateY(-30px) translateX(80px) scale(0.92);
-}
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -313,15 +309,6 @@ h2 em {
 .scrollblock--visible {
   opacity: 1;
   transform: translateY(0) translateX(0);
-}
-.scrollblock--hidden {
-  opacity: 0;
-}
-.scrollblock--left.scrollblock--hidden {
-  transform: translateY(-60px) translateX(80px);
-}
-.scrollblock--right.scrollblock--hidden {
-  transform: translateY(-60px) translateX(-80px);
 }
 .section--right {
   align-items: flex-end;

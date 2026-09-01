@@ -21,10 +21,6 @@ export default function ScrollBlock({ children, direction }: Props) {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('scrollblock--visible');
-          el.classList.remove('scrollblock--hidden');
-        } else {
-          el.classList.add('scrollblock--hidden');
-          el.classList.remove('scrollblock--visible');
         }
       },
       { threshold: 0.1, rootMargin: '0px 0px 200px 0px' }

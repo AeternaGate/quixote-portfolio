@@ -15,10 +15,6 @@ export default function Hero() {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('hero--visible');
-          el.classList.remove('hero--hidden');
-        } else {
-          el.classList.add('hero--hidden');
-          el.classList.remove('hero--visible');
         }
       },
       { threshold: 0.1, rootMargin: '0px 0px 200px 0px' }
