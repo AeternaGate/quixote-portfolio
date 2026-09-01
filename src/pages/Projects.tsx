@@ -2,26 +2,36 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../LangContext';
 import Nav from '../components/Nav';
 import LiquidEther from '../components/LiquidEther';
-import Folder from '../components/Folder';
+import ProjectCard from '../components/ProjectCard';
+import '../components/ProjectCard.css';
 
 const projects = [
   {
     key: 'projectAutopilot' as const,
     descKey: 'projectAutopilotDesc' as const,
     color: '#dc143c',
+    colorRgb: '220, 20, 60',
     url: '#',
+    tags: ['Telegram', 'Node.js', 'AI', 'Automation'],
+    isExternal: false,
   },
   {
     key: 'projectAiToolbox' as const,
     descKey: 'projectAiToolboxDesc' as const,
     color: '#8b0000',
+    colorRgb: '139, 0, 0',
     url: '#',
+    tags: ['React', 'TypeScript', 'LLM', 'Tools'],
+    isExternal: false,
   },
   {
     key: 'projectOpenSource' as const,
     descKey: 'projectOpenSourceDesc' as const,
     color: '#b22222',
+    colorRgb: '178, 34, 34',
     url: 'https://github.com/AeternaGate',
+    tags: ['Open Source', 'GitHub', 'Community'],
+    isExternal: true,
   },
 ];
 
@@ -74,45 +84,20 @@ export default function Projects() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '3rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '2.5rem',
             }}
           >
             {projects.map((p) => (
-              <a
+              <ProjectCard
                 key={p.key}
+                title={t[p.key]}
+                description={t[p.descKey]}
+                tags={p.tags}
+                color={p.color}
                 href={p.url}
-                target={p.url.startsWith('http') ? '_blank' : undefined}
-                rel={p.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '1.5rem',
-                  padding: '3rem 2rem',
-                  border: '1px solid var(--line)',
-                  borderRadius: '16px',
-                  background: 'rgba(12, 3, 3, 0.6)',
-                  backdropFilter: 'blur(8px)',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  transition: 'border-color 0.3s, transform 0.3s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--petal)';
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--line)';
-                  e.currentTarget.style.transform = 'none';
-                }}
-              >
-                <Folder size={2} color={p.color} />
-                <div style={{ textAlign: 'center' }}>
-                  <h2 style={{ fontSize: '1.6rem', fontWeight: 500, marginBottom: '0.5rem' }}>{t[p.key]}</h2>
-                  <p style={{ color: 'var(--muted)', fontSize: '1rem' }}>{t[p.descKey]}</p>
-                </div>
-              </a>
+                isExternal={p.isExternal}
+              />
             ))}
           </div>
         </div>

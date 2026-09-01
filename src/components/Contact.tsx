@@ -33,7 +33,7 @@ export default function Contact() {
           el.classList.add('scrollblock--visible');
         }
       },
-      { threshold: 0, rootMargin: '-45% 0px -45% 0px' }
+      { threshold: 0, rootMargin: '-55% 0px -55% 0px' }
     );
 
     // Exit: wider band — disappears earlier (before edge)
@@ -46,7 +46,7 @@ export default function Contact() {
           el.classList.add(scrollingDown ? 'scrollblock--top' : 'scrollblock--bottom');
         }
       },
-      { threshold: 0, rootMargin: '-40% 0px -40% 0px' }
+      { threshold: 0, rootMargin: '-35% 0px -35% 0px' }
     );
 
     requestAnimationFrame(() => {

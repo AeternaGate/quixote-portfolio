@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 
-const CRIMSON = '#dc143c';
 const DOT_SMOOTH = 0.25;
 const IDLE_TIMEOUT = 2500;
+const SWAY_SPEED = 0.8;
+const SWAY_AMPLITUDE = 4;
 
 export default function SmoothCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const [visible, setVisible] = useState(false);
   const lastMoveTime = useRef(Date.now());
   const pos = useRef({ x: 0, y: 0 });
   const target = useRef({ x: 0, y: 0 });
+  const swayTime = useRef(0);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -35,9 +38,15 @@ export default function SmoothCursor() {
       pos.current.x += (target.current.x - pos.current.x) * DOT_SMOOTH;
       pos.current.y += (target.current.y - pos.current.y) * DOT_SMOOTH;
 
+      swayTime.current += SWAY_SPEED * 0.016;
+      const sway = Math.sin(swayTime.current) * SWAY_AMPLITUDE;
+
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px)`;
         cursorRef.current.style.opacity = idle ? '0' : '1';
+      }
+      if (svgRef.current) {
+        svgRef.current.style.transform = `rotate(${sway}deg)`;
       }
 
       raf = requestAnimationFrame(animate);
@@ -64,21 +73,50 @@ export default function SmoothCursor() {
         pointerEvents: 'none',
         zIndex: 50,
         willChange: 'transform',
+        filter: 'blur(1.5px)',
       }}
       aria-hidden="true"
     >
-      <svg width="36" height="48" viewBox="0 0 36 48" fill="none" style={{ filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.5))' }}>
+      <svg
+        ref={svgRef}
+        width="28"
+        height="36"
+        viewBox="0 0 28 36"
+        fill="none"
+        style={{
+          transformOrigin: 'center bottom',
+          willChange: 'transform',
+        }}
+      >
+        <defs>
+          <linearGradient id="dropGrad" x1="0" y1="0" x2="0" y2="36" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#9a1b1b" stopOpacity="1" />
+            <stop offset="35%" stopColor="#dc143c" stopOpacity="1" />
+            <stop offset="70%" stopColor="#8b0000" stopOpacity="1" />
+            <stop offset="100%" stopColor="#4a0a0a" stopOpacity="1" />
+          </linearGradient>
+          <radialGradient id="dropHighlight" cx="14" cy="10" r="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.35)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </radialGradient>
+          <radialGradient id="dropInnerShadow" cx="14" cy="28" r="10" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="rgba(0,0,0,0)" />
+            <stop offset="100%" stopColor="rgba(0,0,0,0.4)" />
+          </radialGradient>
+        </defs>
         <path
-          d="M18 0 C18 0 2 18 2 28 C2 37 9.2 44 18 44 C26.8 44 34 37 34 28 C34 18 18 0 18 0Z"
-          fill={CRIMSON}
+          d="M14 0 C14 0 2 14 2 22 C2 30 6.5 34 14 34 C21.5 34 26 30 26 22 C26 14 14 0 14 0Z"
+          fill="url(#dropGrad)"
         />
         <path
-          d="M18 5 C18 5 7 20 7 28 C7 34 11.5 38 18 38"
-          stroke="rgba(255,255,255,0.3)"
-          strokeWidth="3"
-          strokeLinecap="round"
-          fill="none"
+          d="M14 3 C14 3 5 16 5 22 C5 27 8.5 30 14 30"
+          fill="url(#dropHighlight)"
         />
+        <path
+          d="M14 22 C14 22 10 28 10 30 C10 31 13.5 32 14 32 C14.5 32 18 31 18 30 C18 28 14 22 14 22Z"
+          fill="url(#dropInnerShadow)"
+        />
+        <ellipse cx="14" cy="10" rx="5" ry="3" fill="rgba(255,255,255,0.15)" />
       </svg>
     </div>
   );

@@ -270,7 +270,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6rem 5vw;
+  padding: 10rem 5vw;
 }
 .sec-label {
   font-size: 0.95rem;
