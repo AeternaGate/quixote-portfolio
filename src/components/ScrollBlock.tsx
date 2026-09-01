@@ -25,9 +25,8 @@ export default function ScrollBlock({ children, direction, isLast = false }: Pro
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top top',
-        end: '+=100%',
-        pin: true,
+        start: 'top bottom',
+        end: 'bottom top',
         scrub: 0.5,
       },
     });

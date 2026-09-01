@@ -15,6 +15,9 @@ export default function SmoothCursor() {
     if (mql.matches) return;
     if ('ontouchstart' in window) return;
 
+    // Force hide cursor via JS for browsers that ignore CSS cursor:none
+    document.documentElement.classList.add('custom-cursor');
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -134,6 +137,7 @@ export default function SmoothCursor() {
     raf = requestAnimationFrame(draw);
 
     return () => {
+      document.documentElement.classList.remove('custom-cursor');
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', onResize);
       window.removeEventListener('mousemove', onMouseMove);

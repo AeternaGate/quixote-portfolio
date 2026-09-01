@@ -54,6 +54,15 @@ a {
   background: var(--scarlet);
   color: var(--ivory);
 }
+
+/* Robust cursor hiding for OperaGX and other browsers */
+.custom-cursor,
+.custom-cursor *,
+.custom-cursor *::before,
+.custom-cursor *::after {
+  cursor: none !important;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
