@@ -28,9 +28,8 @@ export default function Contact() {
       ease: 'power2.out',
       scrollTrigger: {
         trigger: el,
-        start: 'top 150%',
-        end: 'top 50%',
-        scrub: 0.5,
+        start: 'top 90%',
+        toggleActions: 'play none none reverse',
       },
     });
 
