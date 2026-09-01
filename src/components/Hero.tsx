@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLang } from '../LangContext';
 import { usePrefersReducedMotion } from '../usePrefersReducedMotion';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const { t } = useLang();
@@ -12,12 +15,33 @@ export default function Hero() {
     const el = ref.current;
     if (!el || reduced) return;
 
-    gsap.fromTo(el, { opacity: 0, x: -80 }, {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      ease: 'power3.out',
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top top',
+        end: '+=100%',
+        pin: true,
+        scrub: 0.5,
+      },
     });
+
+    tl.fromTo(el, {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      x: 0,
+    }, {
+      opacity: 0,
+      scale: 0.92,
+      y: -60,
+      x: 80,
+      ease: 'none',
+    });
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
   }, [reduced]);
 
   return (
