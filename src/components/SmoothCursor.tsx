@@ -114,7 +114,7 @@ export default function SmoothCursor() {
 
       // tip at mouse, body sways via rotation around tip
       ctx.save();
-      ctx.translate(dotX, dotY);
+      ctx.translate(dotX, dotY + DOT_RADIUS * 1.8);
       ctx.rotate(wobble);
 
       drawDrop(DOT_RADIUS);
