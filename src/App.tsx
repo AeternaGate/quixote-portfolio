@@ -27,9 +27,7 @@ export default function App() {
         <ScrollBlock direction="left">
           <About />
         </ScrollBlock>
-        <ScrollBlock direction="right" isLast>
-          <Contact />
-        </ScrollBlock>
+        <Contact />
         <Footer />
       </div>
     </>

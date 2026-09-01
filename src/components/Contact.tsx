@@ -1,10 +1,39 @@
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLang } from '../LangContext';
+import { usePrefersReducedMotion } from '../usePrefersReducedMotion';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
   const { t } = useLang();
+  const ref = useRef<HTMLElement>(null);
+  const reduced = usePrefersReducedMotion();
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduced) return;
+
+    const anim = gsap.fromTo(el,
+      { opacity: 0, x: -80 },
+      { opacity: 1, x: 0, ease: 'power2.out', duration: 0.8,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    );
+
+    return () => {
+      anim.scrollTrigger?.kill();
+      anim.kill();
+    };
+  }, [reduced]);
 
   return (
-    <section id="contact" className="section section--right">
+    <section ref={ref} id="contact" className="section section--right">
       <div className="eyebrow" style={{ marginBottom: 0 }}>
         {t.contactEyebrow}
       </div>

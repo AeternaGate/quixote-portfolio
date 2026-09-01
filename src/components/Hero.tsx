@@ -15,29 +15,28 @@ export default function Hero() {
     const el = ref.current;
     if (!el || reduced) return;
 
-    // enter from left on load
-    gsap.set(el, { opacity: 0, x: -80 });
-    gsap.to(el, {
+    const loadTl = gsap.timeline();
+    loadTl.fromTo(el, { opacity: 0, x: -80 }, {
       opacity: 1,
       x: 0,
       duration: 1,
       ease: 'power3.out',
     });
 
-    // exit to right on scroll
-    const anim = gsap.to(el, {
-      opacity: 0,
-      x: 80,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
+    const anim = gsap.fromTo(el,
+      { opacity: 1, x: 0 },
+      { opacity: 0, x: 80, ease: 'none',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
       },
-    });
+    );
 
     return () => {
+      loadTl.kill();
       anim.scrollTrigger?.kill();
       anim.kill();
     };
