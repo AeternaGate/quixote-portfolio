@@ -20,8 +20,8 @@ export default function Contact() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'top 90%',
-        end: 'top 40%',
+        start: 'top 120%',
+        end: 'top 50%',
         scrub: 0.5,
         invalidateOnRefresh: true,
       },
