@@ -45,8 +45,6 @@ export default function SmoothCursor() {
     let mouseY = h / 2;
     let dotX = w / 2;
     let dotY = h / 2;
-    let prevDotX = w / 2;
-    let prevDotY = h / 2;
     let lastMoveTime = Date.now();
     let cursorOpacity = 1;
 
@@ -57,10 +55,9 @@ export default function SmoothCursor() {
     };
     window.addEventListener('mousemove', onMouseMove);
 
-    const drawDrop = (cx: number, cy: number, angle: number, r: number) => {
+    const drawDrop = (cx: number, cy: number, r: number) => {
       ctx.save();
       ctx.translate(cx, cy);
-      ctx.rotate(angle + Math.PI);
 
       ctx.beginPath();
 
@@ -109,17 +106,10 @@ export default function SmoothCursor() {
       dotX += (mouseX - dotX) * DOT_SMOOTH;
       dotY += (mouseY - dotY) * DOT_SMOOTH;
 
-      const dx = dotX - prevDotX;
-      const dy = dotY - prevDotY;
-      const angle = Math.atan2(dy, dx);
-
-      prevDotX += (dotX - prevDotX) * 0.3;
-      prevDotY += (dotY - prevDotY) * 0.3;
-
       ctx.clearRect(0, 0, w, h);
       ctx.globalAlpha = cursorOpacity;
 
-      drawDrop(dotX, dotY, angle, DOT_RADIUS);
+      drawDrop(dotX, dotY, DOT_RADIUS);
 
       ctx.fillStyle = CRIMSON;
       ctx.shadowColor = CRIMSON;
