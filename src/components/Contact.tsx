@@ -11,17 +11,41 @@ export default function Contact() {
     const el = ref.current;
     if (!el || reduced) return;
 
+    el.classList.add('scrollblock--right');
+
+    let lastScrollY = window.scrollY;
+    let scrollingDown = true;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      scrollingDown = y >= lastScrollY;
+      lastScrollY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('contact--visible');
+          el.classList.remove('scrollblock--top', 'scrollblock--bottom');
+          el.classList.add(scrollingDown ? 'scrollblock--bottom' : 'scrollblock--top');
+          el.offsetHeight;
+          el.classList.add('scrollblock--visible');
+        } else {
+          el.classList.remove('scrollblock--visible');
+          el.classList.remove('scrollblock--top', 'scrollblock--bottom');
+          el.offsetHeight;
+          el.classList.add(scrollingDown ? 'scrollblock--top' : 'scrollblock--bottom');
         }
       },
       { threshold: 0 }
     );
 
-    observer.observe(el);
-    return () => observer.disconnect();
+    requestAnimationFrame(() => observer.observe(el));
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, [reduced]);
 
   return (

@@ -177,12 +177,13 @@ a {
   padding: 0 5vw;
   position: relative;
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+.hero--bottom { transform: translate(-80px, 60px); }
+.hero--top    { transform: translate(-80px, -60px); }
 .hero--visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none !important;
 }
 .eyebrow {
   display: inline-flex;
@@ -269,7 +270,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem 5vw;
+  padding: 6rem 5vw;
 }
 .sec-label {
   font-size: 0.95rem;
@@ -297,18 +298,15 @@ h2 em {
 .scrollblock {
   will-change: opacity, transform;
   opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-.scrollblock--left {
-  transform: translateY(60px) translateX(-80px);
-}
-.scrollblock--right {
-  transform: translateY(60px) translateX(80px);
-}
+.scrollblock--left.scrollblock--bottom  { transform: translate(-80px, 60px); }
+.scrollblock--left.scrollblock--top     { transform: translate(-80px, -60px); }
+.scrollblock--right.scrollblock--bottom { transform: translate(80px, 60px); }
+.scrollblock--right.scrollblock--top    { transform: translate(80px, -60px); }
 .scrollblock--visible {
   opacity: 1;
-  transform: translateY(0) translateX(0);
+  transform: none !important;
 }
 .section--right {
   align-items: flex-end;
