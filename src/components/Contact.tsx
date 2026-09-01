@@ -17,28 +17,19 @@ export default function Contact() {
 
     gsap.set(el, { opacity: 0, scale: 0.92, y: 60, x: 80 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 120%',
-        end: 'top 50%',
-        scrub: 0.5,
-        invalidateOnRefresh: true,
-      },
+    const show = () => gsap.to(el, { opacity: 1, scale: 1, y: 0, x: 0, duration: 0.8, ease: 'power2.out' });
+    const hide = () => gsap.to(el, { opacity: 0, scale: 0.92, y: 60, x: 80, duration: 0.4, ease: 'power2.in' });
+
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: 'top 80%',
+      onEnter: show,
+      onLeaveBack: hide,
     });
 
-    tl.to(el, {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      x: 0,
-      ease: 'power2.out',
-    });
+    if (st.isActive) show();
 
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
+    return () => st.kill();
   }, [reduced]);
 
   return (
