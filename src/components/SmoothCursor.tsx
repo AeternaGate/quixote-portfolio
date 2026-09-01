@@ -45,47 +45,45 @@ export default function SmoothCursor() {
     let mouseY = h / 2;
     let dotX = w / 2;
     let dotY = h / 2;
+    let wobbleAngle = 0;
+    let wobbleSpeed = 0;
     let lastMoveTime = Date.now();
     let cursorOpacity = 1;
 
     const onMouseMove = (e: MouseEvent) => {
+      const dx = e.clientX - mouseX;
+      const dy = e.clientY - mouseY;
+      const speed = Math.sqrt(dx * dx + dy * dy);
+      wobbleSpeed = Math.min(speed * 0.015, 0.4);
       mouseX = e.clientX;
       mouseY = e.clientY;
       lastMoveTime = Date.now();
     };
     window.addEventListener('mousemove', onMouseMove);
 
-    const drawDrop = (cx: number, cy: number, r: number) => {
-      ctx.save();
-      ctx.translate(cx, cy);
-
+    const drawDrop = (r: number) => {
       ctx.beginPath();
 
-      //尖端在上 (translated: tip at top before rotation)
       ctx.moveTo(0, -r * 1.8);
 
-      // right side: from tip down to wide base
       ctx.bezierCurveTo(
         r * 0.3, -r * 1.4,
         r * 1.0, -r * 0.4,
         r * 1.0, r * 0.2
       );
 
-      // right-bottom curve to center bottom
       ctx.bezierCurveTo(
         r * 1.0, r * 0.7,
         r * 0.5, r * 1.1,
         0, r * 1.1
       );
 
-      // left-bottom from center
       ctx.bezierCurveTo(
         -r * 0.5, r * 1.1,
         -r * 1.0, r * 0.7,
         -r * 1.0, r * 0.2
       );
 
-      // left side: from base back to tip
       ctx.bezierCurveTo(
         -r * 1.0, -r * 0.4,
         -r * 0.3, -r * 1.4,
@@ -93,12 +91,13 @@ export default function SmoothCursor() {
       );
 
       ctx.closePath();
-      ctx.restore();
     };
 
     let raf: number;
+    let time = 0;
     const draw = () => {
       const now = Date.now();
+      time = now * 0.003;
       const idle = now - lastMoveTime > IDLE_TIMEOUT;
       const targetOpacity = idle ? 0 : 1;
       cursorOpacity += (targetOpacity - cursorOpacity) * (idle ? FADE_OUT_SPEED : FADE_IN_SPEED);
@@ -106,10 +105,19 @@ export default function SmoothCursor() {
       dotX += (mouseX - dotX) * DOT_SMOOTH;
       dotY += (mouseY - dotY) * DOT_SMOOTH;
 
+      wobbleAngle += (0 - wobbleAngle) * 0.08;
+      wobbleSpeed *= 0.95;
+      const wobble = Math.sin(time * 2) * (0.06 + wobbleSpeed);
+
       ctx.clearRect(0, 0, w, h);
       ctx.globalAlpha = cursorOpacity;
 
-      drawDrop(dotX, dotY, DOT_RADIUS);
+      // tip at mouse, body sways via rotation around tip
+      ctx.save();
+      ctx.translate(dotX, dotY);
+      ctx.rotate(wobble);
+
+      drawDrop(DOT_RADIUS);
 
       ctx.fillStyle = CRIMSON;
       ctx.shadowColor = CRIMSON;
@@ -117,6 +125,7 @@ export default function SmoothCursor() {
       ctx.globalAlpha = cursorOpacity * 0.95;
       ctx.fill();
 
+      ctx.restore();
       ctx.globalAlpha = 1;
       ctx.shadowBlur = 0;
 
