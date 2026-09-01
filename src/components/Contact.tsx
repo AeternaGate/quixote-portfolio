@@ -37,7 +37,7 @@ export default function Contact() {
           el.classList.add(scrollingDown ? 'scrollblock--top' : 'scrollblock--bottom');
         }
       },
-      { threshold: 0 }
+      { threshold: 0, rootMargin: '-40% 0px -40% 0px' }
     );
 
     requestAnimationFrame(() => observer.observe(el));

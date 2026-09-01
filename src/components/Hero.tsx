@@ -41,7 +41,7 @@ export default function Hero() {
           el.classList.add(scrollingDown ? 'hero--top' : 'hero--bottom');
         }
       },
-      { threshold: 0 }
+      { threshold: 0, rootMargin: '-40% 0px -40% 0px' }
     );
 
     requestAnimationFrame(() => observer.observe(el));
