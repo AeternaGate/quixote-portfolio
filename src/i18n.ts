@@ -14,6 +14,7 @@ export interface Dict {
   workH2a: string;
   workH2b: string;
   workBody: string;
+  workCta: string;
   aboutLabel: string;
   aboutH2a: string;
   aboutH2b: string;
@@ -29,6 +30,14 @@ export interface Dict {
   footer2: string;
   langAria: string;
   title: string;
+  projectsTitle: string;
+  projectsBack: string;
+  projectAutopilot: string;
+  projectAutopilotDesc: string;
+  projectAiToolbox: string;
+  projectAiToolboxDesc: string;
+  projectOpenSource: string;
+  projectOpenSourceDesc: string;
 }
 
 export const I18N: Record<Lang, Dict> = {
@@ -48,6 +57,7 @@ export const I18N: Record<Lang, Dict> = {
     workH2b: 'built & shipped',
     workBody:
       'AutoPilot Bot — Telegram bot with AI assistant for auto-posting content. AI Toolbox — a curated site of useful AI tools. Open Source — public experiments and code on GitHub.',
+    workCta: 'View all projects',
     aboutLabel: 'About',
     aboutH2a: 'A partner, ',
     aboutH2b: 'not just a developer',
@@ -65,6 +75,14 @@ export const I18N: Record<Lang, Dict> = {
     footer2: 'Built with craft. All details are placeholders until real assets are added.',
     langAria: 'Language',
     title: 'Quixote.Dev — Portfolio',
+    projectsTitle: 'All Projects',
+    projectsBack: 'Back',
+    projectAutopilot: 'AutoPilot Bot',
+    projectAutopilotDesc: 'Telegram bot with AI assistant for auto-posting content.',
+    projectAiToolbox: 'AI Toolbox',
+    projectAiToolboxDesc: 'A curated site of useful AI tools.',
+    projectOpenSource: 'Open Source',
+    projectOpenSourceDesc: 'Public experiments and code on GitHub.',
   },
   ru: {
     navWork: 'Работы',
@@ -82,6 +100,7 @@ export const I18N: Record<Lang, Dict> = {
     workH2b: 'создал и запустил',
     workBody:
       'AutoPilot Bot — Telegram-бот с AI-ассистентом для автопубликации контента. AI Toolbox — подборка полезных AI-инструментов в одном месте. Open Source — публичный код и эксперименты на GitHub.',
+    workCta: 'Все проекты',
     aboutLabel: 'Обо мне',
     aboutH2a: 'Партнёр, ',
     aboutH2b: 'а не просто разработчик',
@@ -99,6 +118,14 @@ export const I18N: Record<Lang, Dict> = {
     footer2: 'Сделано с мастерством. Все данные — заглушки до добавления реальных материалов.',
     langAria: 'Язык',
     title: 'Quixote.Dev — Портфолио',
+    projectsTitle: 'Все проекты',
+    projectsBack: 'Назад',
+    projectAutopilot: 'AutoPilot Bot',
+    projectAutopilotDesc: 'Telegram-бот с AI-ассистентом для автопубликации контента.',
+    projectAiToolbox: 'AI Toolbox',
+    projectAiToolboxDesc: 'Подборка полезных AI-инструментов.',
+    projectOpenSource: 'Open Source',
+    projectOpenSourceDesc: 'Публичный код и эксперименты на GitHub.',
   },
 };
 
