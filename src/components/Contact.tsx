@@ -23,14 +23,23 @@ export default function Contact() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    const observer = new IntersectionObserver(
+    // Enter: narrow band — appears later (deep in center)
+    const enterObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.remove('scrollblock--top', 'scrollblock--bottom');
           el.classList.add(scrollingDown ? 'scrollblock--bottom' : 'scrollblock--top');
           el.offsetHeight;
           el.classList.add('scrollblock--visible');
-        } else {
+        }
+      },
+      { threshold: 0, rootMargin: '-45% 0px -45% 0px' }
+    );
+
+    // Exit: wider band — disappears earlier (before edge)
+    const exitObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
           el.classList.remove('scrollblock--visible');
           el.classList.remove('scrollblock--top', 'scrollblock--bottom');
           el.offsetHeight;
@@ -40,10 +49,14 @@ export default function Contact() {
       { threshold: 0, rootMargin: '-40% 0px -40% 0px' }
     );
 
-    requestAnimationFrame(() => observer.observe(el));
+    requestAnimationFrame(() => {
+      enterObserver.observe(el);
+      exitObserver.observe(el);
+    });
 
     return () => {
-      observer.disconnect();
+      enterObserver.disconnect();
+      exitObserver.disconnect();
       window.removeEventListener('scroll', onScroll);
     };
   }, [reduced]);

@@ -27,14 +27,23 @@ export default function Hero() {
       el.classList.add('hero--visible');
     }
 
-    const observer = new IntersectionObserver(
+    // Enter: narrow band — appears later (deep in center)
+    const enterObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.remove('hero--top', 'hero--bottom');
           el.classList.add(scrollingDown ? 'hero--bottom' : 'hero--top');
           el.offsetHeight;
           el.classList.add('hero--visible');
-        } else {
+        }
+      },
+      { threshold: 0, rootMargin: '-45% 0px -45% 0px' }
+    );
+
+    // Exit: wider band — disappears earlier (before edge)
+    const exitObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
           el.classList.remove('hero--visible');
           el.classList.remove('hero--top', 'hero--bottom');
           el.offsetHeight;
@@ -44,10 +53,14 @@ export default function Hero() {
       { threshold: 0, rootMargin: '-40% 0px -40% 0px' }
     );
 
-    requestAnimationFrame(() => observer.observe(el));
+    requestAnimationFrame(() => {
+      enterObserver.observe(el);
+      exitObserver.observe(el);
+    });
 
     return () => {
-      observer.disconnect();
+      enterObserver.disconnect();
+      exitObserver.disconnect();
       window.removeEventListener('scroll', onScroll);
     };
   }, [reduced]);

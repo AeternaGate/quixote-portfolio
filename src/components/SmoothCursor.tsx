@@ -67,10 +67,17 @@ export default function SmoothCursor() {
       }}
       aria-hidden="true"
     >
-      <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+      <svg width="36" height="48" viewBox="0 0 36 48" fill="none" style={{ filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.5))' }}>
         <path
-          d="M10 0 C10 0 2 12 2 18 C2 22.4 5.6 26 10 26 C14.4 26 18 22.4 18 18 C18 12 10 0 10 0Z"
+          d="M18 0 C18 0 2 18 2 28 C2 37 9.2 44 18 44 C26.8 44 34 37 34 28 C34 18 18 0 18 0Z"
           fill={CRIMSON}
+        />
+        <path
+          d="M18 5 C18 5 7 20 7 28 C7 34 11.5 38 18 38"
+          stroke="rgba(255,255,255,0.3)"
+          strokeWidth="3"
+          strokeLinecap="round"
+          fill="none"
         />
       </svg>
     </div>
