@@ -4,7 +4,7 @@ export default function Work() {
   const { t } = useLang();
 
   return (
-    <section id="work" className="section">
+    <section id="work" className="section section--right">
       <div className="sec-label">{t.workLabel}</div>
       <h2>
         <span>{t.workH2a}</span>

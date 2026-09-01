@@ -15,8 +15,8 @@ export default function Hero() {
     const el = ref.current;
     if (!el || reduced) return;
 
-    // enter from right on load
-    gsap.set(el, { opacity: 0, x: 80 });
+    // enter from left on load
+    gsap.set(el, { opacity: 0, x: -80 });
     gsap.to(el, {
       opacity: 1,
       x: 0,
@@ -24,10 +24,10 @@ export default function Hero() {
       ease: 'power3.out',
     });
 
-    // exit to left on scroll
+    // exit to right on scroll
     const anim = gsap.to(el, {
       opacity: 0,
-      x: -80,
+      x: 80,
       ease: 'none',
       scrollTrigger: {
         trigger: el,

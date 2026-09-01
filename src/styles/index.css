@@ -165,8 +165,6 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-  text-align: right;
   padding: 0 5vw;
   position: relative;
 }
@@ -315,7 +313,7 @@ h2 em {
   display: flex;
   gap: 0.9rem;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: flex-end;
   margin-top: 0.5rem;
 }
 .chip {

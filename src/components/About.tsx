@@ -4,7 +4,7 @@ export default function About() {
   const { t } = useLang();
 
   return (
-    <section id="about" className="section section--right">
+    <section id="about" className="section">
       <div className="sec-label">{t.aboutLabel}</div>
       <h2>
         <span>{t.aboutH2a}</span>

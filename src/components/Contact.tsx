@@ -4,7 +4,7 @@ export default function Contact() {
   const { t } = useLang();
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section section--right">
       <div className="eyebrow" style={{ marginBottom: 0 }}>
         {t.contactEyebrow}
       </div>
