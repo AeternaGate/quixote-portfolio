@@ -15,12 +15,14 @@ export default function Hero() {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('hero--visible');
+        } else {
+          el.classList.remove('hero--visible');
         }
       },
       { threshold: 0.1, rootMargin: '0px 0px 200px 0px' }
     );
 
-    observer.observe(el);
+    requestAnimationFrame(() => observer.observe(el));
     return () => observer.disconnect();
   }, [reduced]);
 

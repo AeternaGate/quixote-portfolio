@@ -21,12 +21,14 @@ export default function ScrollBlock({ children, direction }: Props) {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('scrollblock--visible');
+        } else {
+          el.classList.remove('scrollblock--visible');
         }
       },
       { threshold: 0.1, rootMargin: '0px 0px 200px 0px' }
     );
 
-    observer.observe(el);
+    requestAnimationFrame(() => observer.observe(el));
     return () => observer.disconnect();
   }, [direction, reduced]);
 
