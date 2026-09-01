@@ -17,7 +17,7 @@ export default function Contact() {
           el.classList.add('contact--visible');
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1, rootMargin: '0px 0px 200px 0px' }
     );
 
     observer.observe(el);
