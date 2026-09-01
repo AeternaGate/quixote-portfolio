@@ -20,14 +20,18 @@ export default function App() {
 
       <div className="shell">
         <Nav />
-        <Hero />
+        <ScrollBlock direction="left">
+          <Hero />
+        </ScrollBlock>
         <ScrollBlock direction="right">
           <Work />
         </ScrollBlock>
         <ScrollBlock direction="left">
           <About />
         </ScrollBlock>
-        <Contact />
+        <ScrollBlock direction="right" isLast>
+          <Contact />
+        </ScrollBlock>
         <Footer />
       </div>
     </>
