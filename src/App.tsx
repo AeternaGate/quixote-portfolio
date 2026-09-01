@@ -1,5 +1,4 @@
 import ScrollRose from './components/ScrollRose';
-import SilkBackground from './components/SilkBackground';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import Work from './components/Work';
@@ -13,7 +12,6 @@ export default function App() {
   return (
     <>
       <SmoothCursor />
-      <SilkBackground />
       <ScrollRose />
       <div className="veil" />
       <div className="grain" />

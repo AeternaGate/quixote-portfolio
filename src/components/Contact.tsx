@@ -1,10 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLang } from '../LangContext';
 import { usePrefersReducedMotion } from '../usePrefersReducedMotion';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
   const { t } = useLang();
@@ -15,21 +11,17 @@ export default function Contact() {
     const el = ref.current;
     if (!el || reduced) return;
 
-    gsap.set(el, { opacity: 0, scale: 0.92, y: 60, x: 80 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('contact--visible');
+        }
+      },
+      { threshold: 0.2 }
+    );
 
-    const show = () => gsap.to(el, { opacity: 1, scale: 1, y: 0, x: 0, duration: 0.8, ease: 'power2.out' });
-    const hide = () => gsap.to(el, { opacity: 0, scale: 0.92, y: 60, x: 80, duration: 0.4, ease: 'power2.in' });
-
-    const st = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 80%',
-      onEnter: show,
-      onLeaveBack: hide,
-    });
-
-    if (st.isActive) show();
-
-    return () => st.kill();
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [reduced]);
 
   return (

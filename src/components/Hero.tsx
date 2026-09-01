@@ -1,10 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLang } from '../LangContext';
 import { usePrefersReducedMotion } from '../usePrefersReducedMotion';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const { t } = useLang();
@@ -15,32 +11,21 @@ export default function Hero() {
     const el = ref.current;
     if (!el || reduced) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 0.5,
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('hero--visible');
+          el.classList.remove('hero--hidden');
+        } else {
+          el.classList.add('hero--hidden');
+          el.classList.remove('hero--visible');
+        }
       },
-    });
+      { threshold: 0.1 }
+    );
 
-    tl.fromTo(el, {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      x: 0,
-    }, {
-      opacity: 0,
-      scale: 0.92,
-      y: -60,
-      x: 80,
-      ease: 'none',
-    });
-
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [reduced]);
 
   return (

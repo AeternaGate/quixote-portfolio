@@ -1,9 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { usePrefersReducedMotion } from '../usePrefersReducedMotion';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   children: ReactNode;
@@ -11,7 +7,7 @@ interface Props {
   isLast?: boolean;
 }
 
-export default function ScrollBlock({ children, direction, isLast = false }: Props) {
+export default function ScrollBlock({ children, direction }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
 
@@ -19,50 +15,24 @@ export default function ScrollBlock({ children, direction, isLast = false }: Pro
     const el = ref.current;
     if (!el || reduced) return;
 
-    const xFrom = direction === 'left' ? -80 : 80;
-    const xTo = direction === 'left' ? 80 : -80;
+    el.classList.add(`scrollblock--${direction}`);
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 0.5,
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('scrollblock--visible');
+          el.classList.remove('scrollblock--hidden');
+        } else {
+          el.classList.add('scrollblock--hidden');
+          el.classList.remove('scrollblock--visible');
+        }
       },
-    });
+      { threshold: 0.15 }
+    );
 
-    // enter
-    tl.fromTo(el, {
-      opacity: 0,
-      scale: 0.92,
-      y: 60,
-      x: xFrom,
-    }, {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      x: 0,
-      duration: 0.4,
-      ease: 'power2.out',
-    });
-
-    if (!isLast) {
-      // exit to opposite side
-      tl.to(el, {
-        opacity: 0,
-        scale: 0.92,
-        y: -60,
-        x: xTo,
-        duration: 0.4,
-        ease: 'power2.in',
-      });
-    }
-
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
-  }, [direction, isLast, reduced]);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [direction, reduced]);
 
   return (
     <div ref={ref} className="scrollblock">
