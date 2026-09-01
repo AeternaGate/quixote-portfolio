@@ -15,27 +15,29 @@ export default function Contact() {
     const el = ref.current;
     if (!el || reduced) return;
 
-    const anim = gsap.fromTo(el, {
-      opacity: 0,
-      scale: 0.92,
-      y: 60,
-      x: 80,
-    }, {
+    gsap.set(el, { opacity: 0, scale: 0.92, y: 60, x: 80 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 90%',
+        end: 'top 40%',
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    tl.to(el, {
       opacity: 1,
       scale: 1,
       y: 0,
       x: 0,
       ease: 'power2.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 90%',
-        toggleActions: 'play none none reverse',
-      },
     });
 
     return () => {
-      anim.scrollTrigger?.kill();
-      anim.kill();
+      tl.scrollTrigger?.kill();
+      tl.kill();
     };
   }, [reduced]);
 
