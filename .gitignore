@@ -1,31 +1,28 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
-*.local
-.DS_Store
-.playwright-mcp/
-.opencode/skills/impeccable/reference/
-.opencode/skills/impeccable/scripts/
-.opencode/skills/morph-ppt/
-.opencode/skills/morph-ppt-3d/
-.opencode/skills/mermaid/
-.opencode/skills/moltbook/
-.opencode/skills/officecli/
-.opencode/skills/officecli-*/
-.opencode/skills/openclaw-setup/
-.opencode/skills/pdf/
-.opencode/skills/session-message/
-.opencode/skills/skill-creator/
-.opencode/skills/story-roleplay/
-.opencode/skills/weixin-file-send/
-.opencode/skills/x-recruiter/
-.opencode/skills/xiaohongshu-recruiter/
-.vite/
 *.tsbuildinfo
-vite.config.d.ts
-vite.config.js
+
+# Vite cache
+.vite/
+
+# Local / env
+*.local
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Playwright artifacts
+.playwright-mcp/
+
+# Design assets (generated)
 preview-desktop.png
 preview-mobile.png
-assets/PixVerse*
-assets/rose-wilting-poster.png
-assets/rose-wilting-poster.webp
-assets/rose-wilting-poster-new.webp
